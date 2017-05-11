@@ -58,7 +58,7 @@ class ViewController: UIViewController {
     
     func updateMap() {
         let centerLocation = CLLocationCoordinate2DMake(userLocation[0], userLocation[1])
-        let mapSpan = MKCoordinateSpanMake(0.1, 0.1)
+        let mapSpan = MKCoordinateSpanMake(0.001, 0.001)
         let mapRegion = MKCoordinateRegionMake(centerLocation, mapSpan)
         self.map.setRegion(mapRegion, animated: true)
     }
