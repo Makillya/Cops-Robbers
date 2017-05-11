@@ -158,7 +158,6 @@
 				TargetAttributes = {
 					0A1A922D1EC4DAE600ABAECD = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = M8LZR6NRDC;
 						ProvisioningStyle = Automatic;
 					};
 					0A1A92411EC4DAE600ABAECD = {
@@ -354,7 +353,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = M8LZR6NRDC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CopsNRobbers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jordan.CopsNRobbers;
@@ -367,7 +366,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = M8LZR6NRDC;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CopsNRobbers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jordan.CopsNRobbers;
