@@ -10,6 +10,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Alamofire
 
 class ViewController: UIViewController {
 
@@ -42,6 +43,14 @@ class ViewController: UIViewController {
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         
         locationManager?.requestWhenInUseAuthorization()
+        
+        
+        Alamofire.request("http://localhost:3000/getData").responseJSON { response in
+            print(response)
+            if let JSON = response.result.value {
+                print("JSON: \(JSON)")
+            }
+        }
         
 	}
 
