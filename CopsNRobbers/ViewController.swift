@@ -6,7 +6,6 @@
 //  Copyright © 2017 Mikayla Jordan. All rights reserved.
 //
 
-// Jordan test push!
 
 import UIKit
 import MapKit
