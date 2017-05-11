@@ -9,36 +9,79 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var map: MKMapView!
     
+    var locationManager: CLLocationManager?
+    var userLocation: Array<Double> = [47.6098342,-122.1967169]
+    var userAnnotation: MKPointAnnotation = MKPointAnnotation()
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
         
-        let centerLocation = CLLocationCoordinate2DMake(47.6098342, -122.1967169)
-        let mapSpan = MKCoordinateSpanMake(0.01, 0.01)
-        let mapRegion = MKCoordinateRegionMake(centerLocation, mapSpan)
-        self.map.setRegion(mapRegion, animated: true)
+        updateMap()
+//        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+//        myAnnotation.coordinate = CLLocationCoordinate2DMake(47.6098342, -122.1967169)
+//        myAnnotation.title = "Current location"
+//        self.map.addAnnotation(myAnnotation)
+//        
+//        let myAnnotation2: MKPointAnnotation = MKPointAnnotation()
+//        myAnnotation2.coordinate = CLLocationCoordinate2DMake(47.6111106, -122.1980925)
+//        myAnnotation2.title = "Other location"
+//        self.map.addAnnotation(myAnnotation2)
         
-        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
-        myAnnotation.coordinate = CLLocationCoordinate2DMake(47.6098342, -122.1967169)
-        myAnnotation.title = "Current location"
-        self.map.addAnnotation(myAnnotation)
         
-        let myAnnotation2: MKPointAnnotation = MKPointAnnotation()
-        myAnnotation2.coordinate = CLLocationCoordinate2DMake(47.6111106, -122.1980925)
-        myAnnotation2.title = "Other location"
-        self.map.addAnnotation(myAnnotation2)
 		// Do any additional setup after loading the view, typically from a nib.
+        
+        //Initialize Location Manager
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager?.requestWhenInUseAuthorization()
+        
 	}
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
-
-
+    
+    func updateUserLocation() {
+        userAnnotation.coordinate = CLLocationCoordinate2DMake(userLocation[0], userLocation[1])
+        userAnnotation.title = "User Location"
+        self.map.addAnnotation(userAnnotation)
+    }
+    
+    func updateMap() {
+        let centerLocation = CLLocationCoordinate2DMake(userLocation[0], userLocation[1])
+        let mapSpan = MKCoordinateSpanMake(0.1, 0.1)
+        let mapRegion = MKCoordinateRegionMake(centerLocation, mapSpan)
+        self.map.setRegion(mapRegion, animated: true)
+    }
 }
 
+
+extension ViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let currentLocation = locations.first?.coordinate {
+            userLocation[0] = currentLocation.latitude
+            userLocation[1] = currentLocation.longitude
+            updateUserLocation()
+            updateMap()
+            print(currentLocation)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager?.startUpdatingLocation()
+            locationManager?.allowsBackgroundLocationUpdates = true
+        }
+    }
+    
+}

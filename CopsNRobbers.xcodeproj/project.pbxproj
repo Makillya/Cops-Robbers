@@ -159,6 +159,11 @@
 					0A1A922D1EC4DAE600ABAECD = {
 						CreatedOnToolsVersion = 8.3.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					0A1A92411EC4DAE600ABAECD = {
 						CreatedOnToolsVersion = 8.3.2;
