@@ -22,6 +22,10 @@ class ViewController: UIViewController {
         let mapSpan = MKCoordinateSpanMake(0.01, 0.01)
         let mapRegion = MKCoordinateRegionMake(centerLocation, mapSpan)
         self.map.setRegion(mapRegion, animated: true)
+        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+        myAnnotation.coordinate = CLLocationCoordinate2DMake(47.6098342, -122.1967169)
+        myAnnotation.title = "Current location"
+        self.map.addAnnotation(myAnnotation)
 		// Do any additional setup after loading the view, typically from a nib.
 	}
 
