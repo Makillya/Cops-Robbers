@@ -18,9 +18,9 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         
-        var centerLocation = CLLocationCoordinate2DMake(47.6098342, -122.1967169)
-        var mapSpan = MKCoordinateSpanMake(0.01, 0.01)
-        var mapRegion = MKCoordinateRegionMake(centerLocation, mapSpan)
+        let centerLocation = CLLocationCoordinate2DMake(47.6098342, -122.1967169)
+        let mapSpan = MKCoordinateSpanMake(0.01, 0.01)
+        let mapRegion = MKCoordinateRegionMake(centerLocation, mapSpan)
         self.map.setRegion(mapRegion, animated: true)
 		// Do any additional setup after loading the view, typically from a nib.
 	}
