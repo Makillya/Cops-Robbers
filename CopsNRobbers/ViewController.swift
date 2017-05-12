@@ -137,7 +137,7 @@ class ViewController: UIViewController {
     }
     
     func renderMap() {
-        retrieveUsersLocationFromServer()
+        //retrieveUsersLocationFromServer()
         
         for annotation in self.map.annotations {
             if (annotation.title!! != "My Location") {
@@ -157,11 +157,10 @@ class ViewController: UIViewController {
                     foxAnnotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(locationCoordinates[0]), CLLocationDegrees(locationCoordinates[1]))
                     foxAnnotation.title = "Fox"
                     self.map.addAnnotation(foxAnnotation)
-                    
                 }
             }
         } else {
-            displayOtherUsersOnMap()
+            //displayOtherUsersOnMap()
         }
     }
 	
