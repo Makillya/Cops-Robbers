@@ -107,6 +107,45 @@ class ViewController: UIViewController {
 		timerLabel.text = timeString(time: TimeInterval(seconds))
 		isTimerRunning = false
 	}
+    
+    func getFoxId() {
+        Alamofire.request("http://52.36.124.53/getFoxId", method: .get).responseJSON {response in
+            if let JSON = response.result.value {
+                if let data = JSON as? [String: String] {
+                    self.foxId = data["foxId"]!
+                }
+            }
+        }
+    }
+    
+    func renderMap() {
+        retrieveUsersLocationFromServer()
+        
+        if foxId != userUUID {
+            for annotation in self.map.annotations {
+                if (annotation.title!! != "My Location") {
+                    self.map.removeAnnotation(annotation)
+                }
+            }
+            
+            for (key, value) in users {
+                var locationCoordinates: Array<Double> = []
+                for coordinate in value as! Array<String> {
+                    locationCoordinates.append(Double(coordinate)!)
+                }
+                
+                if (key == foxId) {
+                    let foxAnnotation: MKPointAnnotation = MKPointAnnotation()
+                    foxAnnotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(locationCoordinates[0]), CLLocationDegrees(locationCoordinates[1]))
+                    foxAnnotation.title = "Fox"
+                    self.map.addAnnotation(foxAnnotation)
+                    
+                }
+            }
+        } else {
+            displayOtherUsersOnMap()
+        }
+    }
 	
 	func timeString(time:TimeInterval) -> String {
 		let seconds = Int(time)
@@ -157,6 +196,12 @@ class ViewController: UIViewController {
 	
     //Function which displays all users locations on the map (other than the device location of the current user)
     func displayOtherUsersOnMap() {
+        for annotation in self.map.annotations {
+            if (annotation.title!! != "My Location") {
+                self.map.removeAnnotation(annotation)
+            }
+        }
+        
         for (key, value) in users {
             if key != userUUID {
                 var locationCoordinates: Array<Double> = []
