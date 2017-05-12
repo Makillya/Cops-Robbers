@@ -139,13 +139,13 @@ class ViewController: UIViewController {
     func renderMap() {
         retrieveUsersLocationFromServer()
         
-        if foxId != userUUID {
-            for annotation in self.map.annotations {
-                if (annotation.title!! != "My Location") {
-                    self.map.removeAnnotation(annotation)
-                }
+        for annotation in self.map.annotations {
+            if (annotation.title!! != "My Location") {
+                self.map.removeAnnotation(annotation)
             }
-            
+        }
+        
+        if foxId != userUUID {
             for (key, value) in users {
                 var locationCoordinates: Array<Double> = []
                 for coordinate in value as! Array<String> {
