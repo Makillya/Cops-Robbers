@@ -77,20 +77,17 @@ extension ViewController: CLLocationManagerDelegate {
             updateUserLocation()
             updateMap()
             let uuid = UIDevice.current.identifierForVendor?.uuidString
-            print(uuid!)
             let coordinates : Parameters = ["key" : [uuid!, userLocation[0], userLocation[1]]]
             
-            Alamofire.request("http://52.36.124.53/sendData", method: .post, parameters: coordinates, encoding: URLEncoding.default).responseJSON { response in print(response) }
+            Alamofire.request("http://52.36.124.53/sendData", method: .post, parameters: coordinates, encoding: URLEncoding.default).responseJSON {response in print()}
             
             
             Alamofire.request("http://52.36.124.53/getData").responseJSON { response in
-                print(response)
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
+                    print(JSON)
                 }
             }
         }
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
