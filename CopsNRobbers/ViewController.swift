@@ -47,7 +47,7 @@ class ViewController: UIViewController {
             let JSON = response.result.value!
             if let data = JSON as? [String: Bool] {
                 print(data)
-                if (data["key"] ?? nil) == false {
+                if (data["status"] ?? nil) == false {
                     self.hiderButtonText.setTitle("You're not foxy!", for: .normal)
                 }
                 else {
@@ -71,7 +71,7 @@ class ViewController: UIViewController {
 		Alamofire.request("http://52.36.124.53/hiderFlag", method: .post, parameters: hider, encoding: URLEncoding.default).responseJSON {response in
 			let JSON = response.result.value!
 			if let data = JSON as? [String: Bool] {
-				if (data["key"] ?? nil) == false {
+				if (data["status"] ?? nil) == false {
 					self.iWasFoundButtonText.setTitle("Only the fox can be found!", for: .normal)
 				}
 				else {
