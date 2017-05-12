@@ -76,9 +76,9 @@ extension ViewController: CLLocationManagerDelegate {
             userLocation[1] = currentLocation.longitude
             updateUserLocation()
             updateMap()
-            let uuid = NSUUID().uuidString
-            let coordinates : Parameters = ["key" : [uuid, userLocation[0], userLocation[1]]]
-            
+            let uuid = UIDevice.current.identifierForVendor?.uuidString
+            print(uuid!)
+            let coordinates : Parameters = ["key" : [uuid!, userLocation[0], userLocation[1]]]
             
             Alamofire.request("http://52.36.124.53/sendData", method: .post, parameters: coordinates, encoding: URLEncoding.default).responseJSON { response in print(response) }
             
