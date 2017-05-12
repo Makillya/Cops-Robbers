@@ -18,6 +18,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var hiderButtonText: UIButton!
+	@IBOutlet weak var iWasFoundButtonText: UIButton!
 	
 	var seconds = 60
 	var timer = Timer()
@@ -64,14 +65,27 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func iWasFoundButtonPressed(_ sender: UIButton) {
-		
+		let hider: [String: String] = ["key": userUUID]
+		Alamofire.request("http://52.36.124.53/hiderFlag", method: .post, parameters: hider, encoding: URLEncoding.default).responseJSON {response in
+			let JSON = response.result.value!
+			if let data = JSON as? [String: Bool] {
+				if (data["key"] ?? nil) == false {
+					self.iWasFoundButtonText.setTitle("Only the fox can be found!", for: .normal)
+				}
+				else {
+					self.iWasFoundButtonText.setTitle("Yell it loudly!", for: .normal)
+				}
+				self.iWasFoundButtonText.isEnabled = false
+			}
+		}
+
 	}
 	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
         updateMap()
-        
+		
         //Get UUID of device
         if let uuid = UIDevice.current.identifierForVendor?.uuidString {
             userUUID = uuid

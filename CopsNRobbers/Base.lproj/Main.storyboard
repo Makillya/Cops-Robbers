@@ -145,6 +145,7 @@
                     </view>
                     <connections>
                         <outlet property="hiderButtonText" destination="UQS-sj-ADG" id="f7s-Du-NrM"/>
+                        <outlet property="iWasFoundButtonText" destination="BMV-Dz-4bw" id="SJW-l1-xzk"/>
                         <outlet property="map" destination="ndg-Ou-82G" id="Qdj-QR-dnO"/>
                         <outlet property="timerLabel" destination="uRX-3f-HNV" id="ueV-BR-1br"/>
                     </connections>
