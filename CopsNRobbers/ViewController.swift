@@ -19,10 +19,9 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var map: MKMapView!
 	
-	//  Timer Variables
-	//	var seconds = 0
-	//	var timer = Timer()
-	//	var isTimerRunning = false
+	var seconds = 60
+	var timer = Timer()
+	var isTimerRunning = false
 	
     var locationManager: CLLocationManager?
     var userLocation: Array<Double> = [47.6098342,-122.1967169]
@@ -30,6 +29,20 @@ class ViewController: UIViewController {
     var userUUID: String = ""
     var users = [String: Any]()
     
+	@IBAction func whereAreTheyButtonPressed(_ sender: UIButton) {
+			if isTimerRunning == false {
+				runTimer()
+			}
+	}
+	
+	@IBAction func hiderButtonPressed(_ sender: UIButton) {
+		
+	}
+	
+	@IBAction func resetButtonPressed(_ sender: UIButton) {
+		
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
         
@@ -49,18 +62,22 @@ class ViewController: UIViewController {
         //Retrieve all other user Locations
         retrieveUsersLocationFromServer()
 	}
+	func runTimer() {
+		isTimerRunning = true
+		timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+	}
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 	}
-    
+	
     //Function which updates user's pin on the map
     func updateUserLocation() {
         userAnnotation.coordinate = CLLocationCoordinate2DMake(userLocation[0], userLocation[1])
         userAnnotation.title = "My Location"
         self.map.addAnnotation(userAnnotation)
     }
-    
+	
     //Function which updates the center location of the map based on the user's current location
     func updateMap() {
         //let centerLocation = CLLocationCoordinate2DMake(userLocation[0], userLocation[1])
@@ -68,15 +85,15 @@ class ViewController: UIViewController {
         //let mapRegion = MKCoordinateRegionMake(centerLocation, mapSpan)
         //self.map.setRegion(mapRegion, animated: true)
     }
-    
+	
     //Function which sends the user's current location to the server
     func sendUserLocationDataToServer() {
             let coordinates : Parameters = ["key" : [userUUID, userLocation[0], userLocation[1]]]
-            
+		
             Alamofire.request("http://52.36.124.53/sendData", method: .post, parameters: coordinates, encoding: URLEncoding.default).responseJSON {response in let _ = response.result.isSuccess}
-        
+		
     }
-    
+	
     //Function which retrieves all user locations from the server
     func retrieveUsersLocationFromServer() {
         Alamofire.request("http://52.36.124.53/getData").responseJSON { response in
@@ -91,7 +108,7 @@ class ViewController: UIViewController {
             }
         }
     }
-    
+	
     //Function which displays all users locations on the map (other than the device location of the current user)
     func displayOtherUsersOnMap() {
         for (key, value) in users {
@@ -100,7 +117,7 @@ class ViewController: UIViewController {
                 for coordinate in value as! Array<String> {
                     locationCoordinates.append(Double(coordinate)!)
                 }
-                
+				
                 let otherUserAnnotation: MKPointAnnotation = MKPointAnnotation()
                 otherUserAnnotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(locationCoordinates[0]), CLLocationDegrees(locationCoordinates[1]))
                 otherUserAnnotation.title = key
@@ -108,38 +125,29 @@ class ViewController: UIViewController {
             }
         }
     }
-	//Timer methods
-	//	if isTimerRunning == false {
-	//		runTimer()
-	//	}
 	
-	//	func runTimer() {
-	//		isTimerRunning = true
-	//		timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
-	//	}
-	//	
-	//	func updateTimer() {
-	//		if seconds < 1 {
-	//			timer.invalidate()
-	//			//Send alert to indicate "time's up!"
-	//		} else {
-	//			seconds -= 1     //This will decrement(count down)the seconds.
-	//			timerLabel.text = timeString(time: TimeInterval(seconds)) //This will update the label.
-	//		}
-	//	}
-	//	
-	//	func resetTimer() {
-	//		timer.invalidate()
-	//		seconds = 0
-	//		timerLabel.text = timeString(time: TimeInterval(seconds))
-	//		isTimerRunning = false
-	//	}
-	//	
-	//	func timeString(time:TimeInterval) -> String {
-	//		let minutes = Int(time) / 60
-	//		let seconds = Int(time) % 60
-	//		return String(format:"%02i:%02i", minutes, seconds)
-	//	}
+	
+		func updateTimer() {
+			if seconds < 1 {
+				timer.invalidate()
+				//Send alert to indicate "time's up!"
+			} else {
+				seconds -= 1     //This will decrement(count down)the seconds.
+				timerLabel.text = timeString(time: TimeInterval(seconds)) //This will update the label.
+			}
+		}
+		
+		func resetTimer() {
+			timer.invalidate()
+			seconds = 0
+			timerLabel.text = timeString(time: TimeInterval(seconds))
+			isTimerRunning = false
+		}
+		
+		func timeString(time:TimeInterval) -> String {
+			let seconds = Int(time)
+			return String(format:"%02i", seconds)
+		}
 }
 
 
