@@ -14,10 +14,10 @@ import Alamofire
 import Foundation
 
 class ViewController: UIViewController {
-	
+    var foxId: String = String()
 	@IBOutlet weak var timerLabel: UILabel!
-
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var hiderButtonText: UIButton!
 	
 	var seconds = 60
 	var timer = Timer()
@@ -36,16 +36,31 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func hiderButtonPressed(_ sender: UIButton) {
-		
+        let hider: [String: String] = ["key": userUUID]
+        Alamofire.request("http://52.36.124.53/hiderFlag", method: .post, parameters: hider, encoding: URLEncoding.default).responseJSON {response in
+            let JSON = response.result.value!
+            if let data = JSON as? [String: Bool] {
+                if (data["key"] ?? nil) == false {
+                    self.hiderButtonText.setTitle("You're not foxy!", for: .normal)
+                }
+                else {
+                    self.hiderButtonText.setTitle("You are the fox!", for: .normal)
+                }
+                self.hiderButtonText.isEnabled = false
+            }
+        }
 	}
-	
+
 	@IBAction func resetButtonPressed(_ sender: UIButton) {
-		
+        Alamofire.request("http://52.36.124.53/reset").responseJSON { response in
+            print(response.result.value!)
+            self.hiderButtonText.setTitle("Fox", for: .normal)
+            self.hiderButtonText.isEnabled = true
+        }
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        
         updateMap()
         
         //Get UUID of device
