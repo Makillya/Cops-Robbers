@@ -44,9 +44,9 @@ class ViewController: UIViewController {
 	@IBAction func hiderButtonPressed(_ sender: UIButton) {
         let hider: [String: String] = ["key": userUUID]
         Alamofire.request("http://52.36.124.53/hiderFlag", method: .post, parameters: hider, encoding: URLEncoding.default).responseJSON {response in
-            print(response.result.value!)
             let JSON = response.result.value!
             if let data = JSON as? [String: Bool] {
+                print(data)
                 if (data["key"] ?? nil) == false {
                     self.hiderButtonText.setTitle("You're not foxy!", for: .normal)
                 }
