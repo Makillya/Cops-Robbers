@@ -14,9 +14,16 @@ import Alamofire
 import Foundation
 
 class ViewController: UIViewController {
+	
+	@IBOutlet weak var timerLabel: UILabel!
 
     @IBOutlet weak var map: MKMapView!
-    
+	
+	//  Timer Variables
+	//	var seconds = 0
+	//	var timer = Timer()
+	//	var isTimerRunning = false
+	
     var locationManager: CLLocationManager?
     var userLocation: Array<Double> = [47.6098342,-122.1967169]
     var userAnnotation: MKPointAnnotation = MKPointAnnotation()
@@ -101,6 +108,38 @@ class ViewController: UIViewController {
             }
         }
     }
+	//Timer methods
+	//	if isTimerRunning == false {
+	//		runTimer()
+	//	}
+	
+	//	func runTimer() {
+	//		isTimerRunning = true
+	//		timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+	//	}
+	//	
+	//	func updateTimer() {
+	//		if seconds < 1 {
+	//			timer.invalidate()
+	//			//Send alert to indicate "time's up!"
+	//		} else {
+	//			seconds -= 1     //This will decrement(count down)the seconds.
+	//			timerLabel.text = timeString(time: TimeInterval(seconds)) //This will update the label.
+	//		}
+	//	}
+	//	
+	//	func resetTimer() {
+	//		timer.invalidate()
+	//		seconds = 0
+	//		timerLabel.text = timeString(time: TimeInterval(seconds))
+	//		isTimerRunning = false
+	//	}
+	//	
+	//	func timeString(time:TimeInterval) -> String {
+	//		let minutes = Int(time) / 60
+	//		let seconds = Int(time) % 60
+	//		return String(format:"%02i:%02i", minutes, seconds)
+	//	}
 }
 
 
