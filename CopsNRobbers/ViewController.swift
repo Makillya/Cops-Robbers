@@ -30,9 +30,13 @@ class ViewController: UIViewController {
     var users = [String: Any]()
     
 	@IBAction func whereAreTheyButtonPressed(_ sender: UIButton) {
-			if isTimerRunning == false {
-				runTimer()
-			}
+		if isTimerRunning == false {
+			resetTimer()
+			runTimer()
+		} else {
+			resetTimer()
+			runTimer()
+		}
 	}
 	
 	@IBAction func hiderButtonPressed(_ sender: UIButton) {
@@ -42,6 +46,11 @@ class ViewController: UIViewController {
 	@IBAction func resetButtonPressed(_ sender: UIButton) {
 		
 	}
+	
+	@IBAction func iWasFoundButtonPressed(_ sender: UIButton) {
+		
+	}
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -65,6 +74,28 @@ class ViewController: UIViewController {
 	func runTimer() {
 		isTimerRunning = true
 		timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
+	}
+	
+	func updateTimer() {
+		if seconds < 1 {
+			timer.invalidate()
+			timerLabel.text = "60"
+		} else {
+			seconds -= 1     //This will decrement(count down)the seconds.
+			timerLabel.text = timeString(time: TimeInterval(seconds)) //This will update the label.
+		}
+	}
+	
+	func resetTimer() {
+		timer.invalidate()
+		seconds = 60
+		timerLabel.text = timeString(time: TimeInterval(seconds))
+		isTimerRunning = false
+	}
+	
+	func timeString(time:TimeInterval) -> String {
+		let seconds = Int(time)
+		return String(format:"%02i", seconds)
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -126,28 +157,6 @@ class ViewController: UIViewController {
         }
     }
 	
-	
-		func updateTimer() {
-			if seconds < 1 {
-				timer.invalidate()
-				//Send alert to indicate "time's up!"
-			} else {
-				seconds -= 1     //This will decrement(count down)the seconds.
-				timerLabel.text = timeString(time: TimeInterval(seconds)) //This will update the label.
-			}
-		}
-		
-		func resetTimer() {
-			timer.invalidate()
-			seconds = 0
-			timerLabel.text = timeString(time: TimeInterval(seconds))
-			isTimerRunning = false
-		}
-		
-		func timeString(time:TimeInterval) -> String {
-			let seconds = Int(time)
-			return String(format:"%02i", seconds)
-		}
 }
 
 

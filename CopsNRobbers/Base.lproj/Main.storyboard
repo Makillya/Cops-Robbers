@@ -25,7 +25,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DKG-hH-BBz">
                                 <rect key="frame" x="16" y="40" width="343" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cops N' Robbers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyT-38-4FU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fox Hunt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyT-38-4FU">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <nil key="textColor"/>
@@ -44,50 +44,81 @@
                                     </mapView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sOg-xR-ADM">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="sOg-xR-ADM">
                                 <rect key="frame" x="16" y="521" width="343" height="50"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="U2M-E8-02u">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="U2M-E8-02u">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQS-sj-ADG">
-                                                <rect key="frame" x="0.0" y="0.0" width="111" height="50"/>
-                                                <state key="normal" title="Hider"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="53" height="50"/>
+                                                <color key="backgroundColor" red="0.56941353790000004" green="0.91503996060000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                <state key="normal" title="Fox">
+                                                    <color key="titleColor" red="0.23498218911917101" green="0.016418349417303888" blue="0.0041863150843553538" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="hiderButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O0t-h2-lDd"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ko2-K2-xcb">
-                                                <rect key="frame" x="116" y="0.0" width="111" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <state key="normal" title="Where Are They?"/>
+                                                <rect key="frame" x="58" y="0.0" width="235" height="50"/>
+                                                <color key="backgroundColor" red="0.56941353790000004" green="0.91503996060000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <state key="normal" title="Where Are They?">
+                                                    <color key="titleColor" red="0.23498218909999999" green="0.016418349419999999" blue="0.004186315084" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="whereAreTheyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jE6-2G-cGB"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRX-3f-HNV">
-                                                <rect key="frame" x="232" y="0.0" width="111" height="50"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRX-3f-HNV">
+                                                <rect key="frame" x="298" y="0.0" width="45" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="uRX-3f-HNV" firstAttribute="leading" secondItem="ko2-K2-xcb" secondAttribute="trailing" constant="5" id="Lcx-LS-1qb"/>
+                                            <constraint firstItem="ko2-K2-xcb" firstAttribute="leading" secondItem="UQS-sj-ADG" secondAttribute="trailing" constant="5" id="Xnt-tp-t5T"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="fia-VR-le1"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qeb-12-u1s">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qeb-12-u1s">
                                 <rect key="frame" x="16" y="582" width="343" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdj-FA-eW3">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="I44-dq-xZ0">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
-                                        <state key="normal" title="Reset"/>
-                                        <connections>
-                                            <action selector="resetButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3h5-bT-KKV"/>
-                                        </connections>
-                                    </button>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMV-Dz-4bw">
+                                                <rect key="frame" x="0.0" y="0.0" width="169" height="50"/>
+                                                <color key="backgroundColor" red="0.56941353787495264" green="0.91503996062070536" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                <state key="normal" title="I Was Found">
+                                                    <color key="titleColor" red="0.23498218909999999" green="0.016418349419999999" blue="0.004186315084" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="iWasFoundButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aHe-eF-10n"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdj-FA-eW3">
+                                                <rect key="frame" x="174" y="0.0" width="169" height="50"/>
+                                                <color key="backgroundColor" red="0.56941353790000004" green="0.91503996060000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <state key="normal" title="Reset">
+                                                    <color key="titleColor" red="0.23498218909999999" green="0.016418349419999999" blue="0.004186315084" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="resetButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3h5-bT-KKV"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pbi-Dh-xtK"/>
@@ -99,6 +130,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="sOg-xR-ADM" secondAttribute="trailing" id="0c0-re-cyE"/>
                             <constraint firstItem="qeb-12-u1s" firstAttribute="top" secondItem="sOg-xR-ADM" secondAttribute="bottom" constant="11" id="2Jn-4b-A9B"/>
                             <constraint firstItem="sOg-xR-ADM" firstAttribute="top" secondItem="4Kv-vA-uuZ" secondAttribute="bottom" constant="14" id="6kV-zc-sWE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uRX-3f-HNV" secondAttribute="trailing" id="7FX-Ri-ko7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DKG-hH-BBz" secondAttribute="trailing" id="HDu-FQ-uDD"/>
                             <constraint firstAttribute="leadingMargin" secondItem="qeb-12-u1s" secondAttribute="leading" id="Nek-AF-uFG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4Kv-vA-uuZ" secondAttribute="trailing" id="T24-Bb-KOP"/>
