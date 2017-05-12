@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     var locationManager: CLLocationManager?
     var userLocation: Array<Double> = [47.6098342,-122.1967169]
     var userAnnotation: MKPointAnnotation = MKPointAnnotation()
+    var users: Array<Any> = []
     
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -44,14 +45,7 @@ class ViewController: UIViewController {
         
         locationManager?.requestWhenInUseAuthorization()
         
-        
-        Alamofire.request("http://localhost:3000/getData").responseJSON { response in
-            print(response)
-            if let JSON = response.result.value {
-                print("JSON: \(JSON)")
-            }
-        }
-        
+
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -82,8 +76,21 @@ extension ViewController: CLLocationManagerDelegate {
             userLocation[1] = currentLocation.longitude
             updateUserLocation()
             updateMap()
-            print(currentLocation)
+            let uuid = NSUUID().uuidString
+            let coordinates : Parameters = ["key" : [uuid, userLocation[0], userLocation[1]]]
+            
+            
+            Alamofire.request("http://52.36.124.53/sendData", method: .post, parameters: coordinates, encoding: URLEncoding.default).responseJSON { response in print(response) }
+            
+            
+            Alamofire.request("http://52.36.124.53/getData").responseJSON { response in
+                print(response)
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+                }
+            }
         }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
