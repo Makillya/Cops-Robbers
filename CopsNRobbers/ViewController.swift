@@ -105,7 +105,6 @@ class ViewController: UIViewController {
 
 
 extension ViewController: CLLocationManagerDelegate {
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.first?.coordinate {
             userLocation[0] = currentLocation.latitude
